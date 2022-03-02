@@ -1,0 +1,35 @@
+<!--Rocío Aragón
+2º DAW-->
+<%- include("template/cabecera" , {tituloWeb: "Inicio" }) %>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../models/sesion.js"></script>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <br>
+        <form id="iniciarSesion" method="POST" action="/">
+            <input type="text" placeholder="Usuario" class="form-control my-2" name="user" id="usuario" required>
+            <input type="password" placeholder="Contraseña" class="form-control my-2" name="pass" id="contraenia" required>
+            <button id="iniciarSesion" name="iniciarSesion" value="iniciarSesion" class="btn btn-danger btn-sm" type="submit">
+        Iniciar Sesion
+        </button>
+            <button name="registrarse" value="registrarse" class="btn btn-danger btn-sm" type="submit">
+            Registrarse
+            </button>
+        </form>
+        <br>
+    </div>
+    <br>
+    <br>
+    <br>
+    <h2 class="mensajeUsuarios">
+        <%= mensaje %>
+    </h2>
+    <br>
+    <br>
+    <br>
+    <%- include("template/footer") %>

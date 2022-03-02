@@ -1,0 +1,28 @@
+<!--Rocío Aragón
+2º DAW-->
+<%- include("template/cabecera" , {tituloWeb: "Nuevo Perro" }) %>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <br>
+        <h1>Crear nuevo Perro</h1>
+        <br>
+        <form action="./crear" class="my-2" method="POST">
+            <input type="text" placeholder="Nombre Perro" class="form-control my-2" name="nombre" required>
+            <input type="text" placeholder="Raza Perro" class="form-control my-2" name="raza" required>
+            <input type="text" placeholder="Descripción Perro" class="form-control my-2" name="descripcion">
+            <input type="text" placeholder="Foto Perro" class="form-control my-2" name="foto">
+
+            <br>
+            <button type="submit" class="btn btn-danger btn-block">
+                Añadir Perro
+            </button>
+        </form>
+        <br>
+        <br>
+        <br>
+    </div>
+
+    <%- include("template/footer") %>

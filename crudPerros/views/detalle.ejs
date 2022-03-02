@@ -1,0 +1,90 @@
+<!--Rocío Aragón
+2º DAW-->
+<%- include("template/cabecera", {tituloWeb: "Detalles de perros"}) %>
+    <br>
+    <br>
+    <div class="container">
+        <br>
+        <h1>
+            Detalles de Perros
+        </h1>
+
+        <% if (error) { %>
+
+            <%= mensaje %>
+                <a href="/perros" class="btn btn-dark btn-block my-2">
+                    Volver
+                    </a>
+                    <% } %>
+                        <% if (!error) { %>
+                            <form id="editar" data-id="<%= perros.id %>">
+                                <input type="text" value="<%= perros.nombre %>" class="form-control my-2" name="nombre" id="nombreInput" required>
+                                <input type="text" value="<%= perros.raza %>" class="form-control my-2" name="raza" id="razaInput" required>
+                                <input type="text" value="<%= perros.descripcion %>" class="form-control my-2" name="descripcion" id="descripcionInput">
+                                <input type="text" value="<%= perros.foto %>" placeholder="Foto Perro" class="form-control my-2" name="foto">
+                                <button class="btn btn-info btn-sm" type="submit">
+                                Editar
+                            </button>
+                            </form>
+                            <hr>
+                            <button class="btn btn-danger btn-sm" data-id="<%= perros.id %>">
+                            Eliminar
+                        </button>
+
+                            <% } %>
+                                <br>
+                                <br>
+    </div>
+    <script>
+        const btnEliminar = document.querySelector('.btn-danger')
+        btnEliminar.addEventListener('click', async() => {
+            console.log(btnEliminar.dataset.id)
+            try {
+                // https://developer.mozilla.org/es/docs/Web/API/HTMLElement/dataset
+                const data = await fetch(`/perros/${btnEliminar.dataset.id}`, {
+                    method: 'delete'
+                })
+                const res = await data.json()
+                console.log(res)
+                if (res.estado) {
+                    window.location.href = '/perros'
+                } else {
+                    console.log(res)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        })
+
+        const formEditar = document.querySelector('#editar');
+        formEditar.addEventListener('submit', async(e) => {
+            e.preventDefault()
+            const nombre = formEditar.elements['nombre'].value
+            const raza = formEditar.elements['raza'].value
+            const descripcion = formEditar.elements['descripcion'].value
+            const id = formEditar.dataset.id
+            const foto = formEditar.elements['foto'].value
+            const data = await fetch(`/perros/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nombre,
+                    raza,
+                    descripcion,
+                    foto
+                })
+            })
+            const res = await data.json()
+            if (res.estado) {
+                window.location.href = '/perros'
+            } else {
+                console.log(res)
+            }
+        })
+    </script>
+    <br>
+    <br>
+    <br>
+    <%- include("template/footer") %>
